@@ -1,0 +1,19 @@
+{
+  "name": "spaceapps2019.backend",
+  "version": "1.0.0",
+  "description": "Backend",
+  "main": "main.js",
+  "scripts": {
+    "test": "node main.js --test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://git.wbydcloud.com/wannabeyourdrug/spaceapps2019"
+  },
+  "author": "wbydcloud team",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.17.1",
+    "express-session": "^1.17.0"
+  }
+}
