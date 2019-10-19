@@ -9,6 +9,9 @@ import Profile from './app/components/Profile.vue';
 import NotFound from './app/components/404.vue';
 
 
+Vue.use(VueRouter);
+
+
 const routes = [{
     path: '/',
     name: 'home',
@@ -36,12 +39,17 @@ const routes = [{
     children: [{
         path: '/new',
         name: 'new',
-        component: NewSystem
+        // component: NewSystem
       },
       {
         path: '/:id'
       }
     ]
+  },
+  {
+    path: '*',
+    name: 'NotFound',
+    component: NotFound
   }
 ];
 
