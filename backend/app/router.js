@@ -39,6 +39,9 @@ router.use('/api/', (req, res, next) => {
 router.use('/api/', api);
 
 router.use(express.static(__dirname + '/../public/'));
-router.use('*', express.static(__dirname + '/../public/index.html'));
+router.use('/', express.static(__dirname + '/../public/index.html'));
+router.use('*', (req, res, next) => {
+    res.status(403).redirect('/#' + req.originalUrl);
+});
 
 module.exports = router;

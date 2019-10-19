@@ -11,67 +11,51 @@ import NotFound from './app/components/404.vue';
 
 Vue.use(VueRouter);
 
-
-const routes = [{
-    path: '/',
-    name: 'home',
-    component: Home
-  },
-  {
-    path: '/login',
-    name: 'login',
-    component: Login
-  },
-  {
-    path: '/register',
-    name: 'register',
-    component: Register
-  },
-  {
-    path: '/profile',
-    name: 'profile',
-    component: Profile
-  },
-  // {
-  //   path: '/systems',
-  //   name: 'system',
-  //   component: Profile,
-  //   children: [{
-  //       path: '/new',
-  //       name: 'new',
-  //       // component: NewSystem
-  //     },
-  //     {
-  //       path: '/:id'
-  //     }
-  //   ]
-  // },
-  {
-    path: '*',
-    name: 'NotFound',
-    component: NotFound
-  }
-];
-
 const router = new VueRouter({
-  routes
+  routes: [{
+      path: '/',
+      name: 'home',
+      component: Home
+    },
+    {
+      path: '/login',
+      name: 'login',
+      component: Login
+    },
+    {
+      path: '/register',
+      name: 'register',
+      component: Register
+    },
+    {
+      path: '/profile',
+      name: 'profile',
+      component: Profile
+    },
+    // {
+    //   path: '/systems',
+    //   name: 'system',
+    //   component: Profile,
+    //   children: [{
+    //       path: '/new',
+    //       name: 'new',
+    //       // component: NewSystem
+    //     },
+    //     {
+    //       path: '/:id'
+    //     }
+    //   ]
+    // },
+    {
+      path: '*',
+      name: 'NotFound',
+      component: NotFound
+    }
+  ]
 });
 
 const app = new Vue({
+  el: '#root',
+  render: h => h(App),
   router
-}).$mount('#root');
-
-// new Vue({
-//   el: '#app',
-//   data: {
-//     currentRoute: window.location.pathname
-//   },
-//   computed: {
-//     ViewComponent() {
-//       return routes[this.currentRoute] || NotFound;
-//     }
-//   },
-//   render(h) {
-//     return h(this.ViewComponent);
-//   }
-// });
+});
