@@ -2,23 +2,25 @@
     <nav class="nav">
         <input class="nav__check" type="checkbox" id="showmenu"/>
         <label class="nav__showmenu" for="showmenu">&#9776;</label>
-        <!-- <div class="top"> -->
-            <ul class="menu">
-                <li>
-                    <a class="menu__item" href="#">Systems</a>
-                    <input class="menu__check" type="checkbox" id="menu2">
-                    <label class="menu__showsub" for="menu2">&#9660;</label>
-                    <ul class="menu__submenu">
-                        <li v-for="star in stars"><a class="menu__item" href="#">{{star.name}}</a></li>
-                    </ul>
-                </li>
-            </ul>
-        <!-- </div> -->
-        <div class="bot">
-            <ul class="menu">
-                <li><a href="#" class="menu__item">Profile</a></li>
-                <li><a href="#" class="menu__item">LogOut</a></li>
-            </ul>
+        <div class="menu">
+            <div class="top">
+                <ul>
+                    <li>
+                        <a class="menu__item" href="#">Systems</a>
+                        <input class="menu__check" type="checkbox" id="menu2">
+                        <label class="menu__showsub" for="menu2">&#9660;</label>
+                        <ul class="menu__submenu">
+                            <li v-for="star in stars"><a class="menu__item" href="#">{{star.name}}</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+            <div class="bot">
+                <ul class="menu">
+                    <li><a href="#" class="menu__item">Profile</a></li>
+                    <li><a href="#" class="menu__item">LogOut</a></li>
+                </ul>
+            </div>
         </div>
     </nav>
 </template>
@@ -64,7 +66,7 @@ export default {
         left: 15px;
     }
 
-    .menu, .menu__submenu{
+    .menu ul, .menu__submenu ul{
         list-style: none;
         padding: 0;
         color: #fff;
