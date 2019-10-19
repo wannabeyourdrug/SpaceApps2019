@@ -14,7 +14,9 @@
                                 <li><span class="menu__item">Loading</span></li>
                             </template>
                             <template v-else>
-                                <li v-for="star in stars"><a class="menu__item" href="#">{{star.name}}</a></li>
+                                <li v-for="star in stars">
+                                    <a class="menu__item" :href="star.star_id">{{ star.name }}</a>
+                                </li>
                             </template>
                         </ul>
                     </li>
@@ -22,7 +24,7 @@
             </div>
             <div class="bot">
                 <ul>
-                    <li><a href="#" class="menu__item">Profile</a></li>
+                    <li><a href="#/profile" class="menu__item">Profile</a></li>
                     <li><a href="#/login" class="menu__item">LogOut</a></li>
                 </ul>
             </div>
@@ -48,7 +50,7 @@ export default {
         getDataFromApi() {
             this.loading = true
             api('system/getList').then(data => {
-                this.stars = data;
+                this.stars = data.map(star => [star.star_id = '#/system/' + star.star_id, star][1]);
                 this.loading = false;
             });
         }

@@ -5,7 +5,7 @@ import Home from './app/components/Home.vue';
 import Login from './app/components/Login.vue';
 import Register from './app/components/Register.vue';
 import Profile from './app/components/Profile.vue';
-// import NewSystem from './app/components/NewSystem.vue';
+import System from './app/components/System.vue';
 import NotFound from './app/components/404.vue';
 
 
@@ -32,20 +32,22 @@ const router = new VueRouter({
       name: 'profile',
       component: Profile
     },
-    // {
-    //   path: '/systems',
-    //   name: 'system',
-    //   component: Profile,
-    //   children: [{
-    //       path: '/new',
-    //       name: 'new',
-    //       // component: NewSystem
-    //     },
-    //     {
-    //       path: '/:id'
-    //     }
-    //   ]
-    // },
+    {
+      path: '/system',
+      name: 'system',
+      children: [{
+          path: '/new',
+          name: 'new',
+          // component: NewSystem
+        },
+        {
+          path: '/:id',
+          name: 'view',
+          component: System,
+          props: true
+        }
+      ]
+    },
     {
       path: '*',
       name: 'NotFound',

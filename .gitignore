@@ -2,3 +2,6 @@
 node_modules
 package-lock.json
 .app.config.js
+
+backend/public/app.js
+backend/public/app.js.map

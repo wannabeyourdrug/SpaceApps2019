@@ -11,7 +11,7 @@ const Planet = require('../models/Planet');
 router.post('/getList', async (req, res) => {
     try {
         let data = await Star.getList(req.session.user_id || 0);
-        data = data.map(star => [star.user_id = uuid.fromUUID(star.star_id), star][1]);
+        data = data.map(star => [star.star_id = uuid.fromUUID(star.star_id), star][1]);
         res.json({
             success: true,
             data
