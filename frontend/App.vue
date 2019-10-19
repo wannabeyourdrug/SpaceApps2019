@@ -1,7 +1,7 @@
 <template>
     <div id="root">
-        <h1>App</h1>
         <canvas id="star-sky"></canvas>
+        <h1>App</h1>
 	    <router-view></router-view>
     </div>
 </template>
@@ -21,7 +21,6 @@ export default {
 
       var fps = 0;
       setInterval(function() {
-        console.log(fps);
         fps = 0;
       }, 1000);
 
