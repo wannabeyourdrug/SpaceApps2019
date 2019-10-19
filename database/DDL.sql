@@ -8,7 +8,7 @@ CREATE TABLE users (
 INSERT INTO users VALUES (0, 'system', '', 'System', 10);
 
 CREATE TABLE stars (
-    star_id SERIAL PRIMARY KEY,
+    star_id uuid PRIMARY KEY,
     user_id int REFERENCES users(user_id) ON DELETE CASCADE,
     name VARCHAR(255) NOT NULL DEFAULT 'My Star',
     radius float NOT NULL,
@@ -18,8 +18,8 @@ CREATE TABLE stars (
 );
 
 CREATE TABLE planets (
-    planet_id SERIAL PRIMARY KEY,
-    star_id  int REFERENCES stars(star_id) ON DELETE CASCADE,
+    planet_id uuid PRIMARY KEY,
+    star_id uuid REFERENCES stars(star_id) ON DELETE CASCADE,
     radius float NOT NULL,
     mass float NOT NULL,
     orbit float NOT NULL,

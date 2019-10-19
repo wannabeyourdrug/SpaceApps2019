@@ -28,7 +28,8 @@ router.get('/logout', (req, res, next) => {
     req.session.destroy();
     res.redirect('/login');
 });
-router.use((req, res, next) => {
+
+router.use('/api/', (req, res, next) => {
     if (!req.session.user_id || !req.session.token || !req.cookies.tkn || !(req.session.token == req.cookies.tkn)) {
         res.status(403).redirect('/login?' + req.originalUrl);
     } else {
@@ -36,5 +37,8 @@ router.use((req, res, next) => {
     }
 });
 router.use('/api/', api);
+
+router.use(express.static(__dirname + '/../public/'));
+router.use('*', express.static(__dirname + '/../public/index.html'));
 
 module.exports = router;

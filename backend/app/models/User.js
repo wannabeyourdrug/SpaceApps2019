@@ -1,5 +1,5 @@
-const db = require('../components/db');
-const helpers = require('../components/helpers');
+const db = require('../helpers/db');
+const crypt = require('../helpers/crypt');
 const bcrypt = require('bcrypt');
 
 module.exports = {
@@ -23,7 +23,7 @@ module.exports = {
     },
 
     create: async (name, login, password, role = 1) => {
-        password = await helpers.hash(password);
+        password = await crypt.hash(password);
         let res = await db.query(`insert into users (name, login, password, role) values ($1, $2, $3, $4) returning user_id`, [name, login, password, role]);
         if (res.rows && res.rows[0] && (res = res.rows[0])) return res.user_id;
     }

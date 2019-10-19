@@ -1,4 +1,4 @@
-const config = require('../../app.config.js');
+const config = require('../../.app.config.js');
 const { Client } = require('pg');
 
 const db = new Client({
