@@ -1,5 +1,6 @@
 <template>
     <div id="app">
+        <h1>Home</h1>
 	    <router-view></router-view>
     </div>
 </template>
@@ -12,6 +13,7 @@ export default {
 
 <style lang="css">
     #root {
+        color: #fff;
         height: 100%;
         width: 100%;
         position: absolute;
