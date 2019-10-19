@@ -1,8 +1,6 @@
 const express = require('express');
 let router = express.Router();
 
-const validate = require('../components/validate');
-
 /**
  * Api method example
  */
