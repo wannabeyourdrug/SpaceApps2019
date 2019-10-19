@@ -31,7 +31,11 @@ router.get('/logout', (req, res, next) => {
 
 router.use('/api/', (req, res, next) => {
     if (!req.session.user_id || !req.session.token || !req.cookies.tkn || !(req.session.token == req.cookies.tkn)) {
-        res.status(403).redirect('/login?' + req.originalUrl);
+        res.json({
+            success: false,
+            error: 'Not Authorized',
+            redirect: '/login'
+        });
     } else {
         next();
     }
