@@ -29,17 +29,17 @@ router.get('/logout', (req, res, next) => {
     res.redirect('/login');
 });
 
-router.use('/api/', (req, res, next) => {
-    if (!req.session.user_id || !req.session.token || !req.cookies.tkn || !(req.session.token == req.cookies.tkn)) {
-        res.json({
-            success: false,
-            error: 'Not Authorized',
-            redirect: '/login'
-        });
-    } else {
-        next();
-    }
-});
+// router.use('/api/', (req, res, next) => {
+//     if (!req.session.user_id || !req.session.token || !req.cookies.tkn || !(req.session.token == req.cookies.tkn)) {
+//         res.json({
+//             success: false,
+//             error: 'Not Authorized',
+//             redirect: '/login'
+//         });
+//     } else {
+//         next();
+//     }
+// });
 router.use('/api/', api);
 
 router.use(express.static(__dirname + '/../public/'));

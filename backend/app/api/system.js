@@ -1,7 +1,7 @@
 const express = require('express');
 let router = express.Router();
 
-const uuid = require('short-uuid');
+const uuid = require('short-uuid')();
 const log = require('../helpers/log')('api.system');
 const validate = require('../helpers/validate');
 
@@ -10,7 +10,8 @@ const Planet = require('../models/Planet');
 
 router.post('/getList', async (req, res) => {
     try {
-        let data = await Star.getList(req.session.user_id).map(star => [star.user_id = uuid.fromUUID(star.star_id), star][1]);
+        let data = await Star.getList(req.session.user_id || 0);
+        data = data.map(star => [star.user_id = uuid.fromUUID(star.star_id), star][1]);
         res.json({
             success: true,
             data
