@@ -8,7 +8,7 @@
   name:'login',
   data (){
    return{
-    title:'Login'
+    login: 'Login'
    }
   }
  }
