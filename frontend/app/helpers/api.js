@@ -1,5 +1,7 @@
+const BACKEND_URL = 'http://127.0.0.1:5000';
+
 export default async function api(query, data) {
-    let result = await fetch('/api/' + query.toString(), {
+    let result = await fetch(BACKEND_URL + '/api/' + query.toString(), {
         method: 'POST',
         body: JSON.stringify(data),
         headers: {
@@ -12,9 +14,7 @@ export default async function api(query, data) {
         if (result.success) {
             return result.data;
         } else {
-            if (result.error) {
-                console.log(`[api] request error:`, result.error, '(', result.statusCode, ')');
-            }
+            console.log(`[api] request error:`, result.error, '');
             if (result.redirect) {
                 // TODO: Олег, сделай редирект
             }

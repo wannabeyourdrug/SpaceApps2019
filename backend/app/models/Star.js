@@ -13,7 +13,7 @@ module.exports = {
             from stars
             where
                 user_id = $1
-        `, user_id)).rows;
+        `, [user_id])).rows;
     },
 
     load: async (star_id, user_id) => {

@@ -10,15 +10,20 @@
                         <input class="menu__check" type="checkbox" id="menu2">
                         <label class="menu__showsub" for="menu2">&#9660;</label>
                         <ul class="menu__submenu">
-                            <li v-for="star in stars"><a class="menu__item" href="#">{{star.name}}</a></li>
+                            <template v-if="loading">
+                                <li><span class="menu__item">Loading</span></li>
+                            </template>
+                            <template v-else>
+                                <li v-for="star in stars"><a class="menu__item" href="#">{{star.name}}</a></li>
+                            </template>
                         </ul>
                     </li>
                 </ul>
             </div>
             <div class="bot">
-                <ul class="menu">
+                <ul>
                     <li><a href="#" class="menu__item">Profile</a></li>
-                    <li><a href="#" class="menu__item">LogOut</a></li>
+                    <li><a href="#/login" class="menu__item">LogOut</a></li>
                 </ul>
             </div>
         </div>
@@ -26,21 +31,27 @@
 </template>
 
 <script>
+import api from '../helpers/api';
+
 export default {
     name: "navbar",
-    data: () => {
+    data() {
         return {
-            stars: [
-                {
-                    name: "Sun",
-                    id: "001"
-                },
-                {
-                    name: "Betelgeize",
-                    id: "002"
-                }
-            ]
+            loading: false,
+            stars: []
         } 
+    },
+    mounted() {
+        this.getDataFromApi();
+    },
+    methods: {
+        getDataFromApi() {
+            this.loading = true
+            api('system/getList').then(data => {
+                this.stars = data;
+                this.loading = false;
+            });
+        }
     }
 }
 </script>
@@ -80,6 +91,7 @@ export default {
         left: 0;
         display: block;
         width: 220px;
+        height: 100vh;
         margin: 0;
         padding: 17px 0;
         text-transform: uppercase;
@@ -91,6 +103,12 @@ export default {
         transition: transform .3s;
         will-change: transform;
         backface-visibility: hidden;
+    }
+
+    .menu .bot {
+        position: absolute;
+        bottom: 5vh;
+        width: 100%;
     }
 
     .menu__submenu {
