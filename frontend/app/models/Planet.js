@@ -1,0 +1,5 @@
+class Planet {
+    constructor(data) {
+        
+    }
+}

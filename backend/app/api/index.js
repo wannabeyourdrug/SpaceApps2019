@@ -22,3 +22,5 @@ router.post('/model/method', async (req, res) => {
         console.error(`[api.model.method]`, e);
     }
 });
+
+module.exports = router;
