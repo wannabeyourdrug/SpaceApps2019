@@ -5,6 +5,35 @@ const log = require('../helpers/log')('models.star');
 const uuid = require('short-uuid');
 
 module.exports = {
+    getList: async (user_id) => {
+        return (await db.query(`
+            select
+                star_id,
+                name
+            from stars
+            where
+                user_id = $1
+        `, user_id)).rows;
+    },
+
+    load: async (star_id, user_id) => {
+        star_id = uuid.toUUID(star_id);
+        return (await db.query(`
+            select
+                name,
+                radius,
+                mass,
+                temp,
+                chz
+            where
+                star_id = $1,
+                user_id = $2
+        `, [
+            star_id,
+            user_id
+        ])).rows[0] || null;
+    },
+
     create: async (user_id, name, radius, mass, temp) => {
         let starUUID = uuid.uuid();
         const chz = calculate.chz(radius, temp);
@@ -34,5 +63,14 @@ module.exports = {
         ]);
 
         return uuid.fromUUID(starUUID);
+    },
+
+    destroy: async (star_id) => {
+        await db.query(`
+            delete
+            from stars
+            where
+                star_id = $1
+        `, [star_id]);
     }
 };

@@ -23,7 +23,8 @@ CREATE TABLE planets (
     radius float NOT NULL,
     mass float NOT NULL,
     orbit float NOT NULL,
-    ms float NOT NULL, -- movment speed по орбите
+    type int NOT NULL, -- 1 - solid; 2 - gas
+    ms float NOT NULL, -- movment speed по орбите в км/с
     rs float NOT NULL, -- rotation speed самой планты
     angle float NOT NULL, -- наклон оси вращения
     ad float NOT NULL -- atmospheric density
