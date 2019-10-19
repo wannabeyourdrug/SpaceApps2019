@@ -32,20 +32,20 @@ const routes = [{
     name: 'profile',
     component: Profile
   },
-  {
-    path: '/systems',
-    name: 'system',
-    component: Profile,
-    children: [{
-        path: '/new',
-        name: 'new',
-        // component: NewSystem
-      },
-      {
-        path: '/:id'
-      }
-    ]
-  },
+  // {
+  //   path: '/systems',
+  //   name: 'system',
+  //   component: Profile,
+  //   children: [{
+  //       path: '/new',
+  //       name: 'new',
+  //       // component: NewSystem
+  //     },
+  //     {
+  //       path: '/:id'
+  //     }
+  //   ]
+  // },
   {
     path: '*',
     name: 'NotFound',

@@ -14,5 +14,7 @@
  }
 </script>
 <style scoped>
- 
+    .login {
+        color: #fff;
+    }
 </style>
