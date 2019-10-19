@@ -23,6 +23,8 @@
 </template>
 
 <script>
+import api from '../helpers/api';
+
 export default {
     name: "system",
     props: {
