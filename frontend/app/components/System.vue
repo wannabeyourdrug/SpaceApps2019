@@ -5,7 +5,7 @@
         </template>
         <template v-else>
             <ul class="starSystem">
-                <li id="star" :class="star.class">
+                <li id="star" :class="star.class" :data-id="uuid" @mouseenter="mouseenter" @mouseleave="mouseleave">
                     <a href="#star">
                         <span> {{ star.name }} </span>
                     </a>
@@ -20,6 +20,14 @@
             </ul>
 
             <div class="tooltip bg">
+                <div class="tooltip__data" :data-id="uuid">
+                    <ul>
+                        <li>Радиус: {{ star.radius }}</li> 
+                        <li>Масса: {{ star.mass }}</li>
+                        <li>Температура: {{ star.temp }}</li> 
+                        <li>Зона обитаемости: {{ star.chz }}</li>
+                    </ul>
+                </div>
                 <div v-for="planet in planets" class="tooltip__data" :data-id="planet.planet_id">
                     <ul>
                         <li>Радиус: {{ planet.radius }}</li> 

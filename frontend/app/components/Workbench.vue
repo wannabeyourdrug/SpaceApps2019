@@ -47,14 +47,14 @@
             <div class="input-group">
                 <div class="input-group-label">
                     <label>
-                        <h3>Radius (km * 10<sup>6</sup>)</h3>
+                        <h3>Radius (km)</h3>
                     </label>
                 </div>
                 <div class="input-group-input">
                     <vue-slider
-                        min="278"
-                        max="1042"
-                        interval="0.1"
+                        min="278204"
+                        max="10432650"
+                        interval="1"
                         v-model="radius"
                     ></vue-slider>
                 </div>
@@ -122,7 +122,7 @@
                 name: generateName(),
                 temp: randomInt(2000, 60000),
                 mass: random(0.596, 119.31),
-                radius: random(278, 1042),
+                radius: random(278204, 10432650),
                 planets: randomInt(1, 10)
             }
         },
