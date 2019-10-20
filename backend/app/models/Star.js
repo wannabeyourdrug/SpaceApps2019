@@ -67,12 +67,13 @@ module.exports = {
         return tranlator.fromUUID(starUUID);
     },
 
-    destroy: async (star_id) => {
+    destroy: async (star_id, user_id) => {
         await db.query(`
             delete
             from stars
             where
-                star_id = $1
-        `, [star_id]);
+                star_id = $1 AND
+                user_id = $2
+        `, [star_id, user_id]);
     }
 };

@@ -90,4 +90,23 @@ router.post('/create', async (req, res) => {
     }
 });
 
+router.post('/destroy/:uuid', async (req, res) => {
+    try {
+        let star_id = req.params.uuid;
+
+        await Star.destroy(star_id, req.session.user_id || 0);
+
+        res.json({
+            success: true,
+            data: {}
+        });
+    } catch (e) {
+        log(e);
+        res.json({
+            success: false,
+            error: e.toString()
+        });
+    }
+});
+
 module.exports = router;

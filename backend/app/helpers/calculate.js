@@ -13,7 +13,7 @@ function lstar(r, t) {
 }
 
 function chz(r, t) {
-    return Math.sqrt(lstar(r, t) / lsun);
+    return Math.sqrt(lstar(r * 1e3, t) / lsun);
 }
 
 function radius(mass) {
