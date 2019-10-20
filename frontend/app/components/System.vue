@@ -18,8 +18,9 @@
                     </a>
                 </li>
             </ul>
-            <div class="entitydata">
-                <a v-for="planet in planets">
+
+            <div class="tooltip">
+                <a v-for="planet in planets" class="tooltiptext">
                     <ul>
                         <li>Радиус: {{ planet.radius }}</li> 
                         <li>Масса: {{ planet.mass }}</li>
@@ -122,29 +123,26 @@ export default {
         z-index: 100;
     }
 
-    .entitydata a {
-        background-color: rgba(0,0,0, 0.8);
-        border-radius: 15px 15px 15px 0px;
-        box-shadow: 1px 1px 10px rgba(0, 0, 0, 0.5);
-        color: #fff;
-        margin-left: 2px;
-        margin-top: -75px;
-        opacity: 0;
-        padding: 10px 10px 10px 40px;
-        position: absolute;
-        text-decoration: none;
+    .tooltip {
+    position: relative;
+    display: inline-block;
+    border-bottom: 1px dotted black;
+}
+
+    .tooltip .tooltiptext {
         visibility: hidden;
-        width: 350px;
-        z-index: 10;
-        -moz-transition: opacity 0.4s ease-in-out, visibility 0.4s ease-in-out;
-        -webkit-transition: opacity 0.4s ease-in-out, visibility 0.4s ease-in-out;
-        -o-transition: opacity 0.4s ease-in-out, visibility 0.4s ease-in-out;
-        -ms-transition: opacity 0.4s ease-in-out, visibility 0.4s ease-in-out;
-        transition: opacity 0.4s ease-in-out, visibility 0.4s ease-in-out;
+        width: 120px;
+        background-color: black;
+        color: #fff;
+        text-align: center;
+        border-radius: 6px;
+        padding: 5px 0;
+
+        position: absolute;
+        z-index: 1;
     }
 
-    .entitydata:hover a { /* По hover отображаем тултип */
-        opacity: 1;
+    .tooltip:hover .tooltiptext {
         visibility: visible;
     }
 
