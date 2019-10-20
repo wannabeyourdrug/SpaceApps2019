@@ -56,17 +56,17 @@ export default {
             this.loading = true
             api('system/load/' + this.uuid).then(data => {
                 let wh = 100;
-                let top = 270;
-                let left = 430;
-                let br = 52;
+                let top = -20;
+                let left = 3;
+                let topPlanet = 20;
                 for (let key in data.planets) {
-                    data.planets[key].color = 'background: ' + this.getPlanetColor(data.planets[key].orbit, data.planets[key].type);
-                    data.planets[key].style = 'height: ' + wh + 'px; width: ' + wh + 'px; top: ' + top + 'px; left: ' + left 
-                        + 'px; border-radius: ' + br + 'px;';
+                    data.planets[key].color = 'background: ' + this.getPlanetColor(data.planets[key].orbit, data.planets[key].type) + '; top: ' + topPlanet + 'px;';
+                    data.planets[key].style = 'height: ' + wh + 'px; width: ' + wh + 'px;' + '-moz-animation-duration: ' + (data.planets[key].ms * 3) + 's;'
+                        + 'left: ' + left + 'px; top: ' + top + 'px;';
                     wh += 60;
-                    left -= 30;
                     top -= 30;
-                    br += 30;
+                    left -= 29;
+                    topPlanet += 26;   
                 }
                 data.star.class = this.getStarClass(data.star.temp);
                 this.star = data.star;
@@ -84,6 +84,9 @@ export default {
             if ( ao >= 0.8 && ao < 1.2 ) return '#06c';
             if ( ao >= 1.2 && ao < 2 )  return '#aa4200';
             if ( ao >= 2 && ao < 12 )return Math.random() > 0.5 ? '##7c6a5c' : '#77c2ec';
+
+            const rc = () => Math.floor(Math.random() * 255).toString(16);
+            return '#' + rc() + rc() + rc();
         },
 
         getStarClass(temp) {
@@ -105,7 +108,7 @@ export default {
         border: none;
         border-radius: 20px;
     }
-
+    
     ul.starSystem li span {
         display: block;
         position: absolute;
@@ -119,6 +122,9 @@ export default {
         display: block;
         position: absolute;
         border: 2px solid #394057;
+
+        
+        transform: translate(-50%, -50%);
         /* opacity: 0.7; */
 
         -webkit-animation-iteration-count:infinite;
@@ -129,6 +135,7 @@ export default {
         -moz-animation-timing-function:linear;
         -moz-animation-name:orbit;
 
+        border-radius: 50%;
     }
  
     .M {
