@@ -10,7 +10,7 @@
                         <span> {{ star.name }} </span>
                     </a>
                 </li>
-                <li v-for="planet in planets" :class="planet.planet_id" :style="planet.style">
+                <li v-for="planet in planets" class="planet" :style="planet.style" :data-id="planet.planet_id" @mouseenter="mouseenter" @mouseleave="mouseleave">
                     <a href="#">
                         <span :style="planet.color">
                             {{ planet.planet_id }}
@@ -19,8 +19,8 @@
                 </li>
             </ul>
 
-            <div class="tooltip">
-                <a v-for="planet in planets" class="tooltiptext">
+            <div class="tooltip bg">
+                <div v-for="planet in planets" class="tooltip__data" :data-id="planet.planet_id">
                     <ul>
                         <li>Радиус: {{ planet.radius }}</li> 
                         <li>Масса: {{ planet.mass }}</li>
@@ -30,7 +30,7 @@
                         <li>Наклон оси вращения: {{ planet.angle }}</li>
                         <li>Атмосферное давление: {{ planet.ad }}</li>
                     </ul>
-                </a>
+                </div>
             </div>
         </template>
     </div>
@@ -76,7 +76,7 @@ export default {
                     topPlanet += 26;
                     zindex -= 1;
                 }
-                data.star.class = this.getStarClass(data.star.temp);
+                data.star.class = 'planet ' + this.getStarClass(data.star.temp);
                 this.star = data.star;
                 this.planets = data.planets;
                 this.loading = false;
@@ -104,6 +104,15 @@ export default {
             if( temp >= 6000 && temp < 10000 ) return 'AF';
             if( temp >= 10000 && temp < 30000 ) return 'B';
             if( temp >= 30000 && temp <= 60000 ) return 'O';
+        },
+
+        mouseenter(ev) {
+            let uuid = ev.target.getAttribute('data-id');
+            document.querySelector(`.tooltip__data[data-id="${uuid}"]`).classList.add('tooltip__visible');
+        },
+        mouseleave(ev) {
+            let uuid = ev.target.getAttribute('data-id');
+            document.querySelector(`.tooltip__data[data-id="${uuid}"]`).classList.remove('tooltip__visible');
         }
     },
     watch: {
@@ -124,26 +133,23 @@ export default {
     }
 
     .tooltip {
-    position: relative;
-    display: inline-block;
-    border-bottom: 1px dotted black;
-}
-
-    .tooltip .tooltiptext {
-        visibility: hidden;
-        width: 120px;
-        background-color: black;
-        color: #fff;
-        text-align: center;
-        border-radius: 6px;
-        padding: 5px 0;
-
-        position: absolute;
-        z-index: 1;
+        position: fixed;
+        width: 22vw;
+        top: 40%;
+        right: -43vw;
+        transform: translate(0, -50%);
+        display: block;
+        z-index: 1000;
+    }
+    .tooltip .tooltip__data {
+        position: relative;
+        top: 0;
+        left: 0;
+        display: none;
     }
 
-    .tooltip:hover .tooltiptext {
-        visibility: visible;
+    .tooltip .tooltip__visible {
+        display: block;
     }
 
     .system {
@@ -151,7 +157,7 @@ export default {
         position: relative;
     }
     
-    ul.starSystem li span {
+    .planet span {
         display: block;
         position: absolute;
         width: 10px;
@@ -159,7 +165,7 @@ export default {
         border-radius: 5px;
     }
 
-    ul.starSystem li {
+    .planet {
         text-indent: -9999px;
         display: block;
         position: absolute;
@@ -180,7 +186,7 @@ export default {
         border-radius: 50%;
     }
  
-    ul.starSystem li:hover {
+    .planet:hover {
         border-color: red;
     }
 
