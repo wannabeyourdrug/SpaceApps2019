@@ -10,9 +10,9 @@
                         <span> {{ star.name }} </span>
                     </a>
                 </li>
-                <li v-for="planet in planets" :class="planet.planet_id">
+                <li v-for="planet in planets" :class="planet.planet_id" :style="planet.style">
                     <a href="#">
-                        <span :style="planet.style">
+                        <span :style="planet.color">
                             {{ planet.planet_id }}
                         </span>
                     </a>
@@ -60,10 +60,10 @@ export default {
                 let left = 430;
                 let br = 52;
                 for (let key in data.planets) {
-                    data.planets[key].style = 'background: ' + this.getPlanetColor(data.planets[key].orbit, data.planets[key].type)
-                        + '; height: ' + sum + 'px; width: ' + sum + 'px; top: ' + top + 'px; left: ' + left 
+                    data.planets[key].color = 'background: ' + this.getPlanetColor(data.planets[key].orbit, data.planets[key].type);
+                    data.planets[key].style = 'height: ' + wh + 'px; width: ' + wh + 'px; top: ' + top + 'px; left: ' + left 
                         + 'px; border-radius: ' + br + 'px;';
-                    sum += 60;
+                    wh += 60;
                     left -= 30;
                     top -= 30;
                     br += 30;
