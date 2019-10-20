@@ -38,4 +38,13 @@
         margin-right: -50%;
         transform: translate(-50%, -50%);
     }
+
+    #content > div {
+        padding: 15px;
+        border-radius: 15px;
+    }
+
+    .bg {
+        background: rgba(44, 44, 44, 0.44);
+    }
 </style>

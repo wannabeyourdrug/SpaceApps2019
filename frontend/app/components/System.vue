@@ -5,7 +5,7 @@
         </template>
         <template v-else>
             <ul class="starSystem">
-                <li class="star">
+                <li id="star" :class="star.class">
                     <a href="#star">
                         <span> {{ star.name }} </span>
                     </a>
@@ -55,20 +55,29 @@ export default {
         getDataFromApi() {
             this.loading = true
             api('system/load/' + this.uuid).then(data => {
+                data.star.class = this.getStarClass(data.star.temp);
                 this.star = data.star;
                 this.planets = data.planets;
                 this.loading = false;
             });
+        },
+
+        getStarClass(temp) {
+            if( temp >= 2000 && temp < 3500 ) return 'M';
         }
     }
 }
 </script>
 
 <style scoped>
-    .star {
+    #star {
         width: 40px;
         height: 40px;
         border: none;
         border-radius: 20px;
+    }
+ 
+    .M {
+        background: #FFA040;
     }
 </style>

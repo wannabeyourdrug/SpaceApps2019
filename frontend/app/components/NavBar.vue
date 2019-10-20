@@ -20,6 +20,9 @@
                             </template>
                         </ul>
                     </li>
+                    <li>
+                        <a href="#/system/new" class="menu__item">New system</a>
+                    </li>
                 </ul>
             </div>
             <div class="bot">
