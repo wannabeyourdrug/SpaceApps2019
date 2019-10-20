@@ -46,7 +46,7 @@ export default {
             stars: []
         } 
     },
-    mounted() {
+    created() {
         this.getDataFromApi();
     },
     methods: {
