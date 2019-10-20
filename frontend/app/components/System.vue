@@ -40,6 +40,12 @@
                     </ul>
                 </div>
             </div>
+
+            <div class="destroy">
+                <a href="#" @click="destroy">
+                    Destroy star
+                </a>
+            </div>
         </template>
     </div>
 </template>
@@ -143,6 +149,11 @@ export default {
         mouseleave(ev) {
             let uuid = ev.target.getAttribute('data-id');
             document.querySelector(`.tooltip__data[data-id="${uuid}"]`).classList.remove('tooltip__visible');
+        },
+        destroy() {
+            api('system/destroy/' + uuid).then(_ => {
+                window.location.replace('#/');
+            });
         }
     },
     watch: {
@@ -154,6 +165,13 @@ export default {
 </script>
 
 <style scoped>
+    .destroy {
+        position: fixed;
+        top: 5vh;
+        left: 5vw;
+
+    }
+
     #star {
         width: 40px;
         height: 40px;
