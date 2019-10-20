@@ -3,7 +3,7 @@ const {
 } = require("vue-loader");
 
 module.exports = {
-  watch: true,
+  // watch: true,
   context: __dirname,
   devtool: "source-map",
   entry: "./main.js",
