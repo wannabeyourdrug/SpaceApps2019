@@ -17,7 +17,7 @@
                         </span>
                     </a>
                 </li>
-            </ul>  
+            </ul>
         </template>
     </div>
 </template>
@@ -51,14 +51,16 @@ export default {
                 let top = -20;
                 let left = 3;
                 let topPlanet = 20;
+                let zindex = 99; 
                 for (let key in data.planets) {
                     data.planets[key].color = 'background: ' + this.getPlanetColor(data.planets[key].orbit, data.planets[key].type) + '; top: ' + topPlanet + 'px;';
                     data.planets[key].style = 'height: ' + wh + 'px; width: ' + wh + 'px;' + '-moz-animation-duration: ' + (data.planets[key].ms * 3) + 's;'
-                        + 'left: ' + left + 'px; top: ' + top + 'px;';
+                        + 'left: ' + left + 'px; top: ' + top + 'px; z-index: ' + zindex;
                     wh += 60;
                     top -= 30;
                     left -= 29;
-                    topPlanet += 26;   
+                    topPlanet += 26;
+                    zindex -= 1;
                 }
                 data.star.class = this.getStarClass(data.star.temp);
                 this.star = data.star;
@@ -104,6 +106,7 @@ export default {
         height: 40px;
         border: none;
         border-radius: 20px;
+        z-index: 100;
     }
 
     .system {
@@ -140,6 +143,10 @@ export default {
         border-radius: 50%;
     }
  
+    ul.starSystem li:hover {
+        border-color: red;
+    }
+
     .M {
         background: #FFA040;
     }
