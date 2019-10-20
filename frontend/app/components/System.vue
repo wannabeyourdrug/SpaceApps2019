@@ -112,6 +112,23 @@ export default {
         height: 10px;
         border-radius: 5px;
     }
+
+    ul.starSystem li {
+        text-indent: -9999px;
+        display: block;
+        position: absolute;
+        border: 2px solid #394057;
+        /* opacity: 0.7; */
+
+        -webkit-animation-iteration-count:infinite;
+        -webkit-animation-timing-function:linear;
+        -webkit-animation-name:orbit;
+        
+        -moz-animation-iteration-count:infinite;
+        -moz-animation-timing-function:linear;
+        -moz-animation-name:orbit;
+
+    }
  
     .M {
         background: #FFA040;
@@ -136,4 +153,10 @@ export default {
     .O {
         background: #AABFFF;
     }
+
+    @-webkit-keyframes orbit { from { -webkit-transform:rotate(0deg) } to { -webkit-transform:rotate(360deg) } }
+    @-webkit-keyframes moon { from { -webkit-transform:rotate(0deg) } to { -webkit-transform:rotate(360deg) } }
+
+    @-moz-keyframes orbit { from { -moz-transform:rotate(0deg) } to { -moz-transform:rotate(360deg) } }
+    @-moz-keyframes moon { from { -moz-transform:rotate(0deg) } to { -moz-transform:rotate(360deg) } }
 </style>
