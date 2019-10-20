@@ -95,7 +95,7 @@ export default {
             if( temp >= 5000 && temp < 6000 ) return 'G';
             if( temp >= 6000 && temp < 10000 ) return 'AF';
             if( temp >= 10000 && temp < 30000 ) return 'B';
-            if( temp >= 30000 && temp < 60000 ) return 'O';
+            if( temp >= 30000 && temp <= 60000 ) return 'O';
         }
     }
 }
