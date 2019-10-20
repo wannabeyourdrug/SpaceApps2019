@@ -1,6 +1,6 @@
 const db = require('../helpers/db');
 const crypt = require('../helpers/crypt');
-const bcrypt = require('bcrypt');
+const bcrypt = require('bcryptjs');
 
 module.exports = {
     auth: async (login, passwd) => {

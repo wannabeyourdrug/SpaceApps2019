@@ -1,6 +1,7 @@
 const express = require('express');
 
 const api = require('./api');
+const crypt = require('./helpers/crypt');
 const log = require('./helpers/log')('router');
 
 const User = require('./models/User');
@@ -13,7 +14,7 @@ router.post('/auth', async (req, res, next) => {
         if (user_id) {
             req.session.user_id = user_id;
 
-            let token = helpers.generateToken(64);
+            let token = crypt.generateToken(64);
             req.session.token = token;
             res.cookie('tkn', token);
             res.redirect(req.body.rpath ? req.body.rpath : '/');
