@@ -40,15 +40,7 @@ export default {
             planets: []
         } 
     },
-    mounted() {
-        
-        function createStar( temp ) {
-            let elem = document.querySelector('star');
-
-            if( temp >= 2000 && temp < 3500 )
-                elem.style.background = '#FFA040'
-        }
-
+    created() {
         this.getDataFromApi();
     },
     methods: {
@@ -97,6 +89,11 @@ export default {
             if( temp >= 10000 && temp < 30000 ) return 'B';
             if( temp >= 30000 && temp <= 60000 ) return 'O';
         }
+    },
+    watch: {
+        '$route.params.uuid'() {
+            this.getDataFromApi();
+        }
     }
 }
 </script>
@@ -108,7 +105,7 @@ export default {
         border: none;
         border-radius: 20px;
     }
-    
+
     ul.starSystem li span {
         display: block;
         position: absolute;
