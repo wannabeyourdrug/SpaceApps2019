@@ -27,8 +27,8 @@
             </div>
             <div class="bot">
                 <ul>
-                    <li><a href="#/profile" class="menu__item">Profile</a></li>
-                    <li><a href="#/login" class="menu__item">LogOut</a></li>
+                    <!-- <li><a href="#/profile" class="menu__item">Profile</a></li>
+                    <li><a href="#/login" class="menu__item">LogOut</a></li> -->
                 </ul>
             </div>
         </div>
