@@ -43,8 +43,7 @@ router.get('/logout', (req, res, next) => {
 // });
 router.use('/api/', api);
 
-router.use('/app.js', express.static(__dirname + '/../public/app.js'));
-router.use('/app.js.map', express.static(__dirname + '/../public/app.js.map'));
+router.use(express.static(__dirname + '/../public/'));
 router.use('/', express.static(__dirname + '/../public/index.html'));
 router.use('*', (req, res, next) => {
     res.status(403).redirect('/#' + req.originalUrl);
