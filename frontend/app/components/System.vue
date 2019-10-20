@@ -39,6 +39,14 @@ export default {
         } 
     },
     mounted() {
+        
+        function createStar( temp ) {
+            let elem = document.querySelector('star');
+
+            if( temp >= 2000 && temp < 3500 )
+                elem.style.background = '#FFA040'
+        }
+
         this.getDataFromApi();
     },
     methods: {
@@ -55,5 +63,8 @@ export default {
 </script>
 
 <style scoped>
-
+    .star {
+        width: 40px;
+        height: 40px;
+    }
 </style>
