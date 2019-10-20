@@ -22,21 +22,21 @@
             <div class="tooltip bg">
                 <div class="tooltip__data" :data-id="uuid">
                     <ul>
-                        <li>Радиус: {{ star.radius }}</li> 
-                        <li>Масса: {{ star.mass }}</li>
-                        <li>Температура: {{ star.temp }}</li> 
-                        <li>Зона обитаемости: {{ star.chz }}</li>
+                        <li>Радиус: {{ star.radius }}, м</li> 
+                        <li>Масса: {{ star.mass }}, кг</li>
+                        <li>Температура: {{ star.temp }}, К</li> 
+                        <li>Зона обитаемости: {{ number_format(star.chz, 2, '.', '') }}, а.е.</li>
                     </ul>
                 </div>
                 <div v-for="planet in planets" class="tooltip__data" :data-id="planet.planet_id">
                     <ul>
                         <li>Радиус: {{ number_format(planet.radius, 4, '.', '') }}, км</li> 
-                        <li>Масса: {{ number_format(planet.mass, 4, '.', '') }}, кг</li>
-                        <li>Орбитальный радиус: {{ planet.orbit }}, </li> 
+                        <li>Масса: {{ number_format(planet.mass / 1e27, 4, '.', '') }}e+27, кг</li>
+                        <li>Орбитальный радиус: {{ number_format(planet.orbit / 1e10, 4, '.', '') }}e+10, км</li> 
                         <li>Скорость движения по орбите: {{ number_format(planet.ms, 2, '.', '') }}, км/с</li>
-                        <li>Время оборота вокруг своей оси: {{ number_format(planet.rs, 4, '.', '') }}</li>    
-                        <li>Наклон оси вращения: {{ number_format(planet.angle, 4, '.', '') }}</li>
-                        <li>Атмосферное давление: {{ number_format(planet.ad, 4, '.', '') }}</li>
+                        <li>Время оборота вокруг своей оси: {{ number_format(planet.rs, 2, '.', '') }}, ч</li>    
+                        <li>Наклон оси вращения: {{ number_format(planet.angle, 1, '.', '') }}°</li>
+                        <li>Атмосферное давление: {{ number_format(planet.ad, 4, '.', '') }}, атм</li>
                     </ul>
                 </div>
             </div>
@@ -71,6 +71,9 @@ export default {
         getDataFromApi() {
             this.loading = true
             api('system/load/' + this.uuid).then(data => {
+                data.planets = data.planets.sort( (a, b) => {
+                    return a.orbit - b.orbit;
+                })
                 let wh = 100;
                 let top = -20;
                 let left = 3;
@@ -78,7 +81,7 @@ export default {
                 let zindex = 99; 
                 for (let key in data.planets) {
                     data.planets[key].color = 'background: ' + this.getPlanetColor(data.planets[key].orbit, data.planets[key].type) + '; top: ' + topPlanet + 'px;';
-                    data.planets[key].style = 'height: ' + wh + 'px; width: ' + wh + 'px;' + '-moz-animation-duration: ' + (data.planets[key].ms * 3) + 's;'
+                    data.planets[key].style = 'height: ' + wh + 'px; width: ' + wh + 'px;' + '-moz-animation-duration: ' + (1 / data.planets[key].ms * 600) + 's;'
                         + 'left: ' + left + 'px; top: ' + top + 'px; z-index: ' + zindex;
                     wh += 60;
                     top -= 30;
