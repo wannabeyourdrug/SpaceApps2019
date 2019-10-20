@@ -21,6 +21,7 @@
 
             <div class="tooltip bg">
                 <div class="tooltip__data" :data-id="uuid">
+                    <h3>{{ star.name }}</h3>
                     <ul>
                         <li>Радиус: {{ star.radius }}e+6, м</li> 
                         <li>Масса: {{ star.mass }}e+30, кг</li>
@@ -40,14 +41,20 @@
                     </ul>
                 </div>
             </div>
+
+            <div class="destroy">
+                <h3>
+                    <a href="#" @click="destroy">
+                        Destroy&nbsp;star
+                    </a>
+                </h3>
+            </div>
         </template>
     </div>
 </template>
 
 <script>
 import api from '../helpers/api';
-
-
 
 export default {
     name: "system",
@@ -71,18 +78,33 @@ export default {
         getDataFromApi() {
             this.loading = true
             api('system/load/' + this.uuid).then(data => {
-                data.planets = data.planets.sort( (a, b) => {
+                data.planets.sort( (a, b) => {
                     return a.orbit - b.orbit;
-                })
+                });
+
+                const outbound = window.innerHeight / 2 - 100;
+                const sizeMultiplier = data.planets.reduce((acc, val) => (acc + val.radius) / 2, data.planets[0].radius);                
+
                 let wh = 100;
                 let top = -20;
                 let left = 3;
                 let topPlanet = 20;
                 let zindex = 99; 
-                for (let key in data.planets) {
-                    data.planets[key].color = 'background: ' + this.getPlanetColor(data.planets[key].orbit, data.planets[key].type) + '; top: ' + topPlanet + 'px;';
-                    data.planets[key].style = 'height: ' + wh + 'px; width: ' + wh + 'px;' + '-moz-animation-duration: ' + (1 / data.planets[key].ms * 600) + 's;'
-                        + 'left: ' + left + 'px; top: ' + top + 'px; z-index: ' + zindex;
+                for (let key in data.planets) {                   
+                    data.planets[key].color = `
+                        background: ${this.getPlanetColor(data.planets[key].orbit, data.planets[key].type)};
+                        top: ${topPlanet}px;
+                        height: ${parseInt(15 * (data.planets[key].radius / sizeMultiplier))}px;
+                        width: ${parseInt(15 * (data.planets[key].radius / sizeMultiplier))}px;
+                    `;
+                    data.planets[key].style = `
+                        height: ${wh}px;
+                        width: ${wh}px;
+                        -moz-animation-duration: ${(1 / data.planets[key].ms * 600)}s;
+                        left: ${left}px;
+                        top: ${top}px;
+                        z-index: ${zindex};
+                    `;
                     wh += 60;
                     top -= 30;
                     left -= 29;
@@ -128,6 +150,14 @@ export default {
             let uuid = ev.target.getAttribute('data-id');
             document.querySelector(`.tooltip__data[data-id="${uuid}"]`).classList.remove('tooltip__visible');
         },
+        destroy(ev) {
+            ev.preventDefault();
+            api('system/destroy/' + this.uuid).then(_ => {
+                window.location.replace('/#/');
+            });
+            return false;
+        },
+
         number_format(number, decimals, dec_point, thousands_sep) {
             number = (number + '').replace(/[^0-9+\-Ee.]/g, '');
             var n = !isFinite(+number) ? 0 : +number,
@@ -159,6 +189,21 @@ export default {
 </script>
 
 <style scoped>
+    .destroy {
+        position: fixed;
+        top: 20vw;
+        left: 40vw;
+    }
+    .destroy a {
+        text-decoration: none;
+        color: #fff;
+        padding: 10px;
+        border-radius: 15px;
+    }
+    .destroy a:hover {
+        box-shadow: 0 0 10px rgba(0,0,0,0.5);
+    }
+
     #star {
         width: 40px;
         height: 40px;
@@ -182,6 +227,9 @@ export default {
         left: 0;
         display: none;
     }
+    .tooltip .tooltip__data h3 {
+        text-align: center;
+    }
 
     .tooltip .tooltip__visible {
         display: block;
@@ -195,9 +243,7 @@ export default {
     .planet span {
         display: block;
         position: absolute;
-        width: 10px;
-        height: 10px;
-        border-radius: 5px;
+        border-radius: 50%;
     }
 
     .planet {

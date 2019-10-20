@@ -68,6 +68,7 @@ module.exports = {
     },
 
     destroy: async (star_id, user_id) => {
+        star_id = tranlator.toUUID(star_id);
         await db.query(`
             delete
             from stars
