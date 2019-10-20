@@ -55,9 +55,19 @@ export default {
         getDataFromApi() {
             this.loading = true
             api('system/load/' + this.uuid).then(data => {
+                let wh = 100;
+                let top = 270;
+                let left = 430;
+                let br = 52;
                 for (let key in data.planets) {
-                    data.planets[key].style = 'background: ' + this.getPlanetColor(data.planets[key].orbit, data.planets[key].type);  
-                };
+                    data.planets[key].style = 'background: ' + this.getPlanetColor(data.planets[key].orbit, data.planets[key].type)
+                        + '; height: ' + sum + 'px; width: ' + sum + 'px; top: ' + top + 'px; left: ' + left 
+                        + 'px; border-radius: ' + br + 'px;';
+                    sum += 60;
+                    left -= 30;
+                    top -= 30;
+                    br += 30;
+                }
                 data.star.class = this.getStarClass(data.star.temp);
                 this.star = data.star;
                 this.planets = data.planets;
@@ -94,6 +104,13 @@ export default {
         height: 40px;
         border: none;
         border-radius: 20px;
+    }
+
+    ul.starSystem li span {
+        position: absolute;
+        width: 10px;
+        height: 10px;
+        border-radius: 5px;
     }
  
     .M {
