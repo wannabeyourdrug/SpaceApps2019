@@ -78,18 +78,33 @@ export default {
         getDataFromApi() {
             this.loading = true
             api('system/load/' + this.uuid).then(data => {
-                data.planets = data.planets.sort( (a, b) => {
+                data.planets.sort( (a, b) => {
                     return a.orbit - b.orbit;
-                })
+                });
+
+                const outbound = window.innerHeight / 2 - 100;
+                const sizeMultiplier = data.planets.reduce((acc, val) => (acc + val.radius) / 2, data.planets[0].radius);                
+
                 let wh = 100;
                 let top = -20;
                 let left = 3;
                 let topPlanet = 20;
                 let zindex = 99; 
-                for (let key in data.planets) {
-                    data.planets[key].color = 'background: ' + this.getPlanetColor(data.planets[key].orbit, data.planets[key].type) + '; top: ' + topPlanet + 'px;';
-                    data.planets[key].style = 'height: ' + wh + 'px; width: ' + wh + 'px;' + '-moz-animation-duration: ' + (1 / data.planets[key].ms * 600) + 's;'
-                        + 'left: ' + left + 'px; top: ' + top + 'px; z-index: ' + zindex;
+                for (let key in data.planets) {                   
+                    data.planets[key].color = `
+                        background: ${this.getPlanetColor(data.planets[key].orbit, data.planets[key].type)};
+                        top: ${topPlanet}px;
+                        height: ${parseInt(15 * (data.planets[key].radius / sizeMultiplier))}px;
+                        width: ${parseInt(15 * (data.planets[key].radius / sizeMultiplier))}px;
+                    `;
+                    data.planets[key].style = `
+                        height: ${wh}px;
+                        width: ${wh}px;
+                        -moz-animation-duration: ${(1 / data.planets[key].ms * 600)}s;
+                        left: ${left}px;
+                        top: ${top}px;
+                        z-index: ${zindex};
+                    `;
                     wh += 60;
                     top -= 30;
                     left -= 29;
@@ -228,9 +243,7 @@ export default {
     .planet span {
         display: block;
         position: absolute;
-        width: 10px;
-        height: 10px;
-        border-radius: 5px;
+        border-radius: 50%;
     }
 
     .planet {
