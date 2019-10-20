@@ -1,8 +1,8 @@
-const sigma = 5.670367 * 10e-8;
-const lsun = 3.827 * 10e26;
+const sigma = 5.670367 * 1e-8;
+const lsun = 3.827 * 1e26;
 
-const eradius = 6371;
-const emass = 5.976 * 10e24;
+const eradius = 6.371 * 1e6;
+const emass = 5.976 * 1e24;
 
 const k1 = 0.20945;
 const k2 = 0.0804;
@@ -13,7 +13,7 @@ function lstar(r, t) {
 }
 
 function chz(r, t) {
-    return Math.sqrt(lstar(r * 1e3, t) / lsun);
+    return Math.sqrt(lstar(r , t) / lsun);
 }
 
 function radius(mass) {

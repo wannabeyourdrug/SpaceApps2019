@@ -22,19 +22,19 @@
             <div class="tooltip bg">
                 <div class="tooltip__data" :data-id="uuid">
                     <ul>
-                        <li>Радиус: {{ star.radius }}, м</li> 
-                        <li>Масса: {{ star.mass }}, кг</li>
+                        <li>Радиус: {{ star.radius }}e+6, м</li> 
+                        <li>Масса: {{ star.mass }}e+30, кг</li>
                         <li>Температура: {{ star.temp }}, К</li> 
                         <li>Зона обитаемости: {{ number_format(star.chz, 2, '.', '') }}, а.е.</li>
                     </ul>
                 </div>
                 <div v-for="planet in planets" class="tooltip__data" :data-id="planet.planet_id">
                     <ul>
-                        <li>Радиус: {{ number_format(planet.radius, 4, '.', '') }}, км</li> 
+                        <li>Радиус: {{ planet.radius }}, км</li> 
                         <li>Масса: {{ number_format(planet.mass / 1e27, 4, '.', '') }}e+27, кг</li>
                         <li>Орбитальный радиус: {{ number_format(planet.orbit / 1e10, 4, '.', '') }}e+10, км</li> 
                         <li>Скорость движения по орбите: {{ number_format(planet.ms, 2, '.', '') }}, км/с</li>
-                        <li>Время оборота вокруг своей оси: {{ number_format(planet.rs, 2, '.', '') }}, ч</li>    
+                        <li>Время оборота вокруг своей оси: {{ number_format(planet.rs, 1, '.', '') }}, ч</li>    
                         <li>Наклон оси вращения: {{ number_format(planet.angle, 1, '.', '') }}°</li>
                         <li>Атмосферное давление: {{ number_format(planet.ad, 4, '.', '') }}, атм</li>
                     </ul>
