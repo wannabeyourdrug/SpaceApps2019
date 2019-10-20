@@ -38,7 +38,7 @@ module.exports = {
 
     create: async (user_id, name, radius, mass, temp) => {
         let starUUID = uuid.uuid();
-        const chz = calculate.chz(radius * 1e6, temp);
+        const chz = calculate.chz(radius, temp);
 
         await db.query(`
             insert
