@@ -57,7 +57,7 @@ module.exports = {
                 ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10)
         `, [
             planetUUID,
-            star_id,
+            translator.toUUID(star_id),
             radius,
             mass,
             orbit,

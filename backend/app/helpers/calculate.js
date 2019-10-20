@@ -9,11 +9,11 @@ const k2 = 0.0804;
 const k3 = 0.394;
 
 function lstar(r, t) {
-    return 4 * Math.PI * Math.pow(radius, 2) * sigma * Math.pow(temp, 4);
+    return 4 * Math.PI * Math.pow(r, 2) * sigma * Math.pow(t, 4);
 }
 
 function chz(r, t) {
-    return Math.sqrt(lstar() / lsun);
+    return Math.sqrt(lstar(r, t) / lsun);
 }
 
 function radius(mass) {
@@ -38,5 +38,6 @@ module.exports = {
     lstar,
     chz,
     mass,
+    radius,
     random
 };

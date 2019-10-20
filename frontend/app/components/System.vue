@@ -55,8 +55,8 @@ export default {
         getDataFromApi() {
             this.loading = true
             api('system/load/' + this.uuid).then(data => {
-                for( let key of data.planets ) {
-                    planets[key].style = 'background: ' + this.getPlanetColor(planet[key].orbit, planet[key].type);  
+                for (let key in data.planets) {
+                    data.planets[key].style = 'background: ' + this.getPlanetColor(data.planets[key].orbit, data.planets[key].type);  
                 };
                 data.star.class = this.getStarClass(data.star.temp);
                 this.star = data.star;

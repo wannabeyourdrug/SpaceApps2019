@@ -60,7 +60,7 @@ router.post('/create', async (req, res) => {
     try {
         let planetsCount = parseInt(req.body.planets);
         let data = {
-            user_id: req.session.user_id,
+            user_id: req.session.user_id || 0,
             name: req.body.name,
             radius: parseFloat(req.body.radius),
             mass: parseFloat(req.body.mass),

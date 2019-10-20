@@ -1,7 +1,10 @@
 <template>
     <div class="workbench bg">
         <h2>Workbench</h2>
-        <form>
+        <form
+            id="workbench"
+            @submit="submitForm"
+            >
             <div class="input-group">
                 <div class="input-group-label">
                     <label>
@@ -79,6 +82,8 @@
 <script>
     import VueSlider from 'vue-slider-component'
     import 'vue-slider-component/theme/default.css'
+
+    import api from '../helpers/api';
     
     function random(a, b) {
         return Math.random() * (b - a) + a;
@@ -112,6 +117,7 @@
     export default {
         name:'workbench',
         data () {
+            this.sending = false;
             return {
                 name: generateName(),
                 temp: randomInt(2000, 60000),
@@ -122,6 +128,24 @@
         },
         components: {
             VueSlider
+        },
+        methods: {
+            submitForm: function (e) {
+                e.preventDefault();
+                
+                if (this.sending) return false;
+                this.sending = true;
+
+                api('system/create', {
+                    name: this.name,
+                    temp: this.temp,
+                    mass: this.mass,
+                    radius: this.radius,
+                    planets: this.planets,
+                }).then(data => {
+                    window.location.replace('#/system/' + data.star);
+                });
+            },
         }
     }
 </script>
