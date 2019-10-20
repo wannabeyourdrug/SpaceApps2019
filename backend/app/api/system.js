@@ -29,7 +29,7 @@ router.post('/load/:uuid', async (req, res) => {
     try {
         let star_id = req.params.uuid;
 
-        let star = await Star.load(req.session.user_id);
+        let star = await Star.load(star_id, req.session.user_id || 0);
 
         if (star) {
             let planets = await Planet.loadByStar(star_id);

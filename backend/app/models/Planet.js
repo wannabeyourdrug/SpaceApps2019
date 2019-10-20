@@ -3,10 +3,11 @@ const calculate = require('../helpers/calculate');
 const log = require('../helpers/log')('models.planet');
 
 const uuid = require('short-uuid');
+const translator = uuid();
 
 module.exports = {
     loadByStar: async (star_id) => {
-        star_id = uuid.toUUID(star_id);
+        star_id = translator.toUUID(star_id);
         return (await db.query(`
             select
                 planet_id,
@@ -21,7 +22,7 @@ module.exports = {
             from planets
             where
                 star_id = $1
-        `, star_id)).rows;
+        `, [star_id])).rows;
     },
 
     create: async (star_id) => {
@@ -67,6 +68,6 @@ module.exports = {
             ad
         ]);
 
-        return uuid.fromUUID(planetUUID);
+        return translator.fromUUID(planetUUID);
     }
 };

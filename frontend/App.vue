@@ -2,7 +2,9 @@
     <div id="root">
         <background />
         <navbar />
-	    <router-view></router-view>
+        <div id="content">
+	        <router-view></router-view>
+        </div>
     </div>
 </template>
 
@@ -19,13 +21,21 @@
     }
 </script>
 
-<style lang="css" scoped>
+<style lang="css">
     #root {
         color: #fff;
-        height: 100%;
+        height: 100vh;
         width: 100%;
         position: absolute;
         left: 0;
         top: 0;
+    }
+
+    #content {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        margin-right: -50%;
+        transform: translate(-50%, -50%);
     }
 </style>

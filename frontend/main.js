@@ -33,21 +33,16 @@ const router = new VueRouter({
       component: Profile
     },
     {
-      path: '/system',
-      name: 'system',
-      children: [{
-          path: '/new',
-          name: 'new',
-          // component: NewSystem
-        },
-        {
-          path: '/:id',
-          name: 'view',
-          component: System,
-          props: true
-        }
-      ]
+      path: '/system/:uuid',
+      name: 'view',
+      component: System,
+      props: true
     },
+    // {
+    //   path: '/system/new',
+    //   name: 'newsystem',
+    //   // component: NewSystem
+    // },
     {
       path: '*',
       name: 'NotFound',

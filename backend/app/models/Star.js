@@ -3,6 +3,7 @@ const calculate = require('../helpers/calculate');
 const log = require('../helpers/log')('models.star');
 
 const uuid = require('short-uuid');
+const tranlator = uuid();
 
 module.exports = {
     getList: async (user_id) => {
@@ -17,7 +18,7 @@ module.exports = {
     },
 
     load: async (star_id, user_id) => {
-        star_id = uuid.toUUID(star_id);
+        star_id = tranlator.toUUID(star_id);
         return (await db.query(`
             select
                 name,
@@ -25,8 +26,9 @@ module.exports = {
                 mass,
                 temp,
                 chz
+            from stars
             where
-                star_id = $1,
+                star_id = $1 AND
                 user_id = $2
         `, [
             star_id,
@@ -62,7 +64,7 @@ module.exports = {
             chz
         ]);
 
-        return uuid.fromUUID(starUUID);
+        return tranlator.fromUUID(starUUID);
     },
 
     destroy: async (star_id) => {
