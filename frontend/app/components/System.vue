@@ -108,6 +108,11 @@ export default {
         border: none;
         border-radius: 20px;
     }
+
+    .system {
+        display: block;
+        position: relative;
+    }
     
     ul.starSystem li span {
         display: block;
