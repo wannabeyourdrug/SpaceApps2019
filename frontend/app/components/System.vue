@@ -31,12 +31,12 @@
                 <div v-for="planet in planets" class="tooltip__data" :data-id="planet.planet_id">
                     <ul>
                         <li>Радиус: {{ number_format(planet.radius, 4, '.', '') }}, км</li> 
-                        <li>Масса: {{ planet.mass }}, кг</li>
+                        <li>Масса: {{ number_format(planet.mass, 4, '.', '') }}, кг</li>
                         <li>Орбитальный радиус: {{ planet.orbit }}, </li> 
-                        <li>Скорость движения по орбите: {{ planet.ms }}, км/с</li>
-                        <li>Время оборота вокруг своей оси: {{ planet.rs }}</li>    
-                        <li>Наклон оси вращения: {{ planet.angle }}</li>
-                        <li>Атмосферное давление: {{ planet.ad }}</li>
+                        <li>Скорость движения по орбите: {{ number_format(planet.ms, 2, '.', '') }}, км/с</li>
+                        <li>Время оборота вокруг своей оси: {{ number_format(planet.rs, 4, '.', '') }}</li>    
+                        <li>Наклон оси вращения: {{ number_format(planet.angle, 4, '.', '') }}</li>
+                        <li>Атмосферное давление: {{ number_format(planet.ad, 4, '.', '') }}</li>
                     </ul>
                 </div>
             </div>
@@ -47,27 +47,7 @@
 <script>
 import api from '../helpers/api';
 
-function number_format(number, decimals, dec_point, thousands_sep) {
-    number = (number + '').replace(/[^0-9+\-Ee.]/g, '');
-    var n = !isFinite(+number) ? 0 : +number,
-        prec = !isFinite(+decimals) ? 0 : Math.abs(decimals),
-        sep = (typeof thousands_sep === 'undefined') ? ',' : thousands_sep,
-        dec = (typeof dec_point === 'undefined') ? '.' : dec_point,
-        s = '',
-        toFixedFix = function (n, prec) {
-            var k = Math.pow(10, prec);
-            return '' + Math.round(n * k) / k;
-        };
-    s = (prec ? toFixedFix(n, prec) : '' + Math.round(n)).split('.');
-    if (s[0].length > 3) {
-        s[0] = s[0].replace(/\B(?=(?:\d{3})+(?!\d))/g, sep);
-    }
-    if ((s[1] || '').length < prec) {
-        s[1] = s[1] || '';
-        s[1] += new Array(prec - s[1].length + 1).join('0');
-    }
-    return s.join(dec);
-};
+
 
 export default {
     name: "system",
@@ -140,10 +120,32 @@ export default {
             let uuid = ev.target.getAttribute('data-id');
             document.querySelector(`.tooltip__data[data-id="${uuid}"]`).classList.add('tooltip__visible');
         },
+        
         mouseleave(ev) {
             let uuid = ev.target.getAttribute('data-id');
             document.querySelector(`.tooltip__data[data-id="${uuid}"]`).classList.remove('tooltip__visible');
-        }
+        },
+        number_format(number, decimals, dec_point, thousands_sep) {
+            number = (number + '').replace(/[^0-9+\-Ee.]/g, '');
+            var n = !isFinite(+number) ? 0 : +number,
+                prec = !isFinite(+decimals) ? 0 : Math.abs(decimals),
+                sep = (typeof thousands_sep === 'undefined') ? ',' : thousands_sep,
+                dec = (typeof dec_point === 'undefined') ? '.' : dec_point,
+                s = '',
+                toFixedFix = function (n, prec) {
+                    var k = Math.pow(10, prec);
+                    return '' + Math.round(n * k) / k;
+                };
+            s = (prec ? toFixedFix(n, prec) : '' + Math.round(n)).split('.');
+            if (s[0].length > 3) {
+                s[0] = s[0].replace(/\B(?=(?:\d{3})+(?!\d))/g, sep);
+            }
+            if ((s[1] || '').length < prec) {
+                s[1] = s[1] || '';
+                s[1] += new Array(prec - s[1].length + 1).join('0');
+            }
+            return s.join(dec);
+        },
     },
     watch: {
         '$route.params.uuid'() {
