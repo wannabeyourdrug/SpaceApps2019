@@ -77,6 +77,12 @@
                 <button type="submit">Create</button>
             </div>
         </form>
+
+        <div id="screen">
+            <h1>
+                Creating system...
+            </h1>
+        </div>
     </div>
 </template>
 <script>
@@ -135,6 +141,7 @@
                 
                 if (this.sending) return false;
                 this.sending = true;
+                document.getElementById('screen').style.display = 'block';
 
                 api('system/create', {
                     name: this.name,
@@ -173,5 +180,16 @@
         padding: 5px 15px;
         border-radius: 5px;
         font-size: 16px;
+    }
+
+    #screen {
+        display: none;
+        position: absolute;
+        top: -10vh;
+        left: -29vw;
+        width: 100vw;
+        height: 100vh;
+        background: rgba(0, 0, 0, 0.7);
+        text-align: center;
     }
 </style>

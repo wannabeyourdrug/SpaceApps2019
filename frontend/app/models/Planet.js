@@ -1,5 +1,0 @@
-class Planet {
-    constructor(data) {
-        
-    }
-}
