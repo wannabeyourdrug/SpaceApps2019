@@ -1,4 +1,4 @@
-const BACKEND_URL = 'http://127.0.0.1:5000';
+const BACKEND_URL = 'https://spaceapps.wbydcloud.com';
 
 export default async function api(query, data) {
     let result = await fetch(BACKEND_URL + '/api/' + query.toString(), {
