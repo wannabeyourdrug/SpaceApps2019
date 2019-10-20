@@ -107,6 +107,7 @@ export default {
     }
 
     ul.starSystem li span {
+        display: block;
         position: absolute;
         width: 10px;
         height: 10px;
