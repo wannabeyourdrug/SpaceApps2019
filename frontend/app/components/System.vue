@@ -68,5 +68,7 @@ export default {
     .star {
         width: 40px;
         height: 40px;
+        border: none;
+        border-radius: 20px;
     }
 </style>
